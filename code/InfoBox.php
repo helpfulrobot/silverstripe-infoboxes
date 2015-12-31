@@ -1,29 +1,29 @@
 <?php
 
-interface InfoBox {
+interface InfoBox
+{
 
-	/**
-	 * Determines if the message should be shown
-	 * @return bool
-	 */
-	public function show();
+    /**
+     * Determines if the message should be shown
+     * @return bool
+     */
+    public function show();
 
-	/**
-	 * Determines the message to show
-	 * @return string
-	 */
-	public function message();
+    /**
+     * Determines the message to show
+     * @return string
+     */
+    public function message();
 
-	/**
-	 * Determines the severity of the message
-	 * @return int either 0, 1, 2
-	 */
-	public function severity();
+    /**
+     * Determines the severity of the message
+     * @return int either 0, 1, 2
+     */
+    public function severity();
 
-	/**
-	 * Adds the option to link to a URL when clicked
-	 * @return string
-	 */
-	public function link();
-
+    /**
+     * Adds the option to link to a URL when clicked
+     * @return string
+     */
+    public function link();
 }

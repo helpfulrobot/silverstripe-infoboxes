@@ -1,27 +1,31 @@
 <?php
 
-class InfoBox_www implements InfoBox {
+class InfoBox_www implements InfoBox
+{
 
-	public function show() {
-		$url = Director::absoluteBaseURL();
+    public function show()
+    {
+        $url = Director::absoluteBaseURL();
 
-		if(preg_match("/^https?:\/\/www./", $url) == 0) {
-			return true;
-		}
+        if (preg_match("/^https?:\/\/www./", $url) == 0) {
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	public function message() {
-		return 'Force www';
-	}
+    public function message()
+    {
+        return 'Force www';
+    }
 
-	public function severity() {
-		return 2;
-	}
-	
-	public function link() {
-		return false;
-	}
-
+    public function severity()
+    {
+        return 2;
+    }
+    
+    public function link()
+    {
+        return false;
+    }
 }

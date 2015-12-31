@@ -1,85 +1,90 @@
 <?php
 
-class InfoBoxTest extends SapphireTest {
+class InfoBoxTest extends SapphireTest
+{
 
-	private function classList() {
-		return ClassInfo::implementorsOf('InfoBox');
-	}
+    private function classList()
+    {
+        return ClassInfo::implementorsOf('InfoBox');
+    }
 
-	public function testShow() {
+    public function testShow()
+    {
+        $classes = $this->classList();
 
-		$classes = $this->classList();
+        foreach ($classes as $class) {
+            $inst = new $class();
 
-		foreach($classes as $class) {
-			$inst = new $class();
+            $return = $inst->show();
 
-			$return = $inst->show();
+            $this->showTest($return);
+        }
+    }
 
-			$this->showTest($return);
-		}
-	}
+    public function testMessage()
+    {
+        $classes = $this->classList();
 
-	public function testMessage() {
+        foreach ($classes as $class) {
+            $inst = new $class();
 
-		$classes = $this->classList();
+            $return = $inst->message();
 
-		foreach($classes as $class) {
-			$inst = new $class();
+            $this->messageTest($return);
+        }
+    }
 
-			$return = $inst->message();
+    public function testSeverity()
+    {
+        $classes = $this->classList();
 
-			$this->messageTest($return);
-		}
-	}
+        foreach ($classes as $class) {
+            $inst = new $class();
 
-	public function testSeverity() {
+            $return = $inst->severity();
 
-		$classes = $this->classList();
+            $this->severityTest($return);
+        }
+    }
 
-		foreach($classes as $class) {
-			$inst = new $class();
+    public function testLink()
+    {
+        $classes = $this->classList();
 
-			$return = $inst->severity();
+        foreach ($classes as $class) {
+            $inst = new $class();
 
-			$this->severityTest($return);
-		}
-	}
+            $return = $inst->link();
 
-	public function testLink() {
+            $this->linkTest($return);
+        }
+    }
 
-		$classes = $this->classList();
+    private function showTest($value)
+    {
+        $this->assertInternalType('boolean', $value);
+    }
 
-		foreach($classes as $class) {
-			$inst = new $class();
+    private function messageTest($value)
+    {
+        $this->assertInternalType('string', $value);
+    }
 
-			$return = $inst->link();
+    private function severityTest($value)
+    {
+        $this->assertInternalType('integer', $value);
+        $this->assertLessThanOrEqual(2, $value);
+        $this->assertGreaterThanOrEqual(0, $value);
+    }
 
-			$this->linkTest($return);
-		}
-	}
-
-	private function showTest($value) {
-		$this->assertInternalType('boolean', $value);
-	}
-
-	private function messageTest($value) {
-		$this->assertInternalType('string', $value);
-	}
-
-	private function severityTest($value) {
-		$this->assertInternalType('integer', $value);
-		$this->assertLessThanOrEqual(2, $value);
-		$this->assertGreaterThanOrEqual(0, $value);
-	}
-
-	private function linkTest($value) {
-		$this->assertThat(
-			$value,
-			$this->logicalOr(
-				$this->isFalse(),
-				$this->isType('string')
-			)
-		);
-	}
-
+    private function linkTest($value)
+    {
+        $this->assertThat(
+            $value,
+            $this->logicalOr(
+                $this->isFalse(),
+                $this->isType('string')
+            )
+        );
+    }
 }
